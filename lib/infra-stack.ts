@@ -14,7 +14,7 @@ export class InfraStack extends cdk.Stack {
     // VPC with both Public and Private Subnets
     const vpc = new ec2.Vpc(this, 'MyVpc', {
       maxAzs: 2,
-      natGateways: 1, // Deploy NAT Gateways for private subnet outbound access
+      natGateways: 1, 
       subnetConfiguration: [
         {
           cidrMask: 24,
@@ -56,7 +56,7 @@ export class InfraStack extends cdk.Stack {
       logging: ecs.LogDrivers.awsLogs({ streamPrefix: 'MyApp' }),
     });
     container.addPortMappings({
-      containerPort: 5001, // Ensure your application is configured to listen on this port.
+      containerPort: 5001, 
       protocol: ecs.Protocol.TCP,
     });
 
@@ -101,11 +101,11 @@ export class InfraStack extends cdk.Stack {
     subnetType: ec2.SubnetType.PRIVATE_WITH_EGRESS,
   },
   credentials: rds.Credentials.fromGeneratedSecret('myadmin'), // Creates an admin user with a generated password.
-  multiAz: false, // Set to true for high availability across multiple Availability Zones.
-  allocatedStorage: 20, // Minimum storage allocation in GB.
-  maxAllocatedStorage: 100, // The maximum storage that your database can autoscale to.
-  deletionProtection: false, // Protects your database from being accidentally deleted. Consider setting to true in production.
-  backupRetention: cdk.Duration.days(7), // Set the backup retention period.
+  multiAz: false, 
+  allocatedStorage: 20, 
+  maxAllocatedStorage: 100, 
+  deletionProtection: false, 
+  backupRetention: cdk.Duration.days(7), 
 });
 
 // Output the RDS instance endpoint
